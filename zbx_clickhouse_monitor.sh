@@ -128,8 +128,8 @@ function run_ch_zabbix_no_data()
     TABLE=$1
   DATABASE="zabbix"
     TIMESTAMP=$((`date +%s`-600))
-  SQL="SELECT count(*) FROM ${TABLE} WHERE clock>${TIMESTAMP}"
-  /usr/bin/clickhouse-client -h "$CH_HOST" -d "$DATABASE" -q "$SQL"
+    SQL="SELECT count(*) FROM ${TABLE} WHERE clock>${TIMESTAMP}"
+    /usr/bin/clickhouse-client -h "$CH_HOST" -d "$DATABASE" -q "$SQL"
 }
 
 case "$ITEM" in
@@ -149,13 +149,13 @@ case "$ITEM" in
   DistributedSend   | \
   HTTPConnection    | \
   MemoryTracking    | \
-  Merge           | \
-  OpenFileForRead   | \
+  Merge               | \
+  OpenFileForRead     | \
   OpenFileForWrite  | \
-  Query         | \
+  Query               | \
   QueryPreempted    | \
   QueryThread       | \
-  Read          | \
+  Read                | \
   ReplicatedFetch   | \
   ReplicatedSend    | \
   ReplicatedChecks  | \
@@ -164,8 +164,8 @@ case "$ITEM" in
   RWLockWaitingWriters| \
   RWLockActiveReaders | \
   RWLockActiveWriters | \
-  TCPConnection   | \
-  Write         | \
+  TCPConnection       | \
+  Write               | \
   ZooKeeperSession  | \
   ZooKeeperRequest  | \
   ZooKeeperWatch    )
@@ -173,19 +173,19 @@ case "$ITEM" in
     ;;
 
   MaxPartCountForPartition| \
-  MarkCacheBytes        | \
+  MarkCacheBytes          | \
   ReplicasMaxAbsoluteDelay| \
-  ReplicasSumQueueSize  | \
+  ReplicasSumQueueSize    | \
   Uptime      )
     run_ch_async_metric_command "$ITEM"
     ;;
 
-  InsertedBytes       | \
-  InsertedRows        | \
-  InsertQuery           | \
-  MergedRows            | \
+  InsertedBytes           | \
+  InsertedRows            | \
+  InsertQuery             | \
+  MergedRows              | \
   MergedUncompressedBytes | \
-  ReadCompressedBytes   | \
+  ReadCompressedBytes     | \
   SelectQuery   )
     run_ch_event_command "$ITEM"
     ;;
@@ -200,11 +200,11 @@ case "$ITEM" in
         run_ch_zabbix_advance_time "history_text"
     ;;
   HistoryUintAdvanceTime  )
-    run_ch_zabbix_advance_time "history_uint"
+        run_ch_zabbix_advance_time "history_uint"
     ;;
 
   HistoryNoData  )
-      run_ch_zabbix_no_data "history"
+        run_ch_zabbix_no_data "history"
     ;;
   HistoryStrNoData  )
         run_ch_zabbix_no_data "history_str"
@@ -213,7 +213,7 @@ case "$ITEM" in
         run_ch_zabbix_no_data "history_text"
     ;;
   HistoryUintNoData  )
-    run_ch_zabbix_no_data "history_uint"
+        run_ch_zabbix_no_data "history_uint"
     ;;
 
   SelectedParts)
